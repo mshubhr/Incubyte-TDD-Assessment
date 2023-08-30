@@ -123,10 +123,11 @@ def execute_commands(initial_position, initial_direction, commands):
                 pass
             elif direction == "Down":
                 pass
-            
-        if previous_direction == None:
-            previous_direction = direction
-        else:
+
+        if position[0] < -100 or position[0] > 100 or position[1] < -100 or position[1] > 100 or position[2] < -100 or position[2] > 100:
+            raise ValueError("The spacecraft has exceeded its permissible boundaries.")
+
+        if direction != "Up" and direction != "Down":
             previous_direction = direction
 
     return position, direction

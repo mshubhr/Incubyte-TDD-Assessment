@@ -56,5 +56,20 @@ class TestSpacecraftControl(unittest.TestCase):
         self.assertEqual(final_position, (0, 0, 0))
         self.assertEqual(final_direction, "Down")
 
+        def test_multiple_commands(self):
+            initial_position = (0, 0, 0)
+            initial_direction = "N"
+            commands = ["f", "r", "u", "b", "l"]
+            final_position, final_direction = execute_commands(initial_position, initial_direction, commands)
+            self.assertEqual(final_position, (0, 1, -1))
+            self.assertEqual(final_direction, "N")
+
+        def test_out_of_bounds(self):
+            initial_position = (0, 0, 0)
+            initial_direction = "N"
+            commands = ["f"] * 200
+            with self.assertRaises(ValueError):
+                final_position, final_direction = execute_commands(initial_position, initial_direction, commands)
+
 if __name__ == '__main__':
     unittest.main()
