@@ -1,6 +1,7 @@
 def execute_commands(initial_position, initial_direction, commands):
     position = initial_position
     direction = initial_direction
+    previous_direction = None
 
     for command in commands:
         if command == "f":
@@ -40,6 +41,24 @@ def execute_commands(initial_position, initial_direction, commands):
                 direction = "N"
             elif direction == "W":
                 direction = "S"
+            elif direction == "Up":
+                if previous_direction == "N":
+                    direction = "W"
+                elif previous_direction == "S":
+                    direction = "E"
+                elif previous_direction == "E":
+                    direction = "N"
+                elif previous_direction == "W":
+                    direction = "S"
+            elif direction == "Down":
+                if previous_direction == "N":
+                    direction = "E"
+                elif previous_direction == "S":
+                    direction = "W"
+                elif previous_direction == "E":
+                    direction = "S"
+                elif previous_direction == "W":
+                    direction = "N"
 
         elif command == "r":
             if direction == "N":
@@ -50,6 +69,32 @@ def execute_commands(initial_position, initial_direction, commands):
                 direction = "S"
             elif direction == "W":
                 direction = "N"
+            elif direction == "Up":
+                if previous_direction == "N":
+                    direction = "E"
+                elif previous_direction == "S":
+                    direction = "W"
+                elif previous_direction == "E":
+                    direction = "S"
+                elif previous_direction == "W":
+                    direction = "N"
+                elif previous_direction == "Up":
+                    pass
+                elif previous_direction == "Down":
+                    pass
+            elif direction == "Down":
+                if previous_direction == "N":
+                    direction = "W"
+                elif previous_direction == "S":
+                    direction = "E"
+                elif previous_direction == "E":
+                    direction = "N"
+                elif previous_direction == "W":
+                    direction = "S"
+                elif previous_direction == "Up":
+                    pass
+                elif previous_direction == "Down":
+                    pass
 
         elif command == "u":
             if direction == "N":
@@ -78,6 +123,10 @@ def execute_commands(initial_position, initial_direction, commands):
                 pass
             elif direction == "Down":
                 pass
-
+            
+        if previous_direction == None:
+            previous_direction = direction
+        else:
+            previous_direction = direction
 
     return position, direction
